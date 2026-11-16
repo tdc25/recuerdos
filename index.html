@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un recuerdo para los dos</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#2a1a22;--ink:#fff4ee;--paper:#fff6ec;--paperink:#4a2c33;--rose:#e0707f;--gold:#e9c27a;
+ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1017}}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:Lora,Georgia,serif}
+.hand{font-family:Caveat,cursive}
+/* ÁLBUM EN MOVIMIENTO */
+.album{position:fixed;inset:0;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:18px;opacity:.55}
+.row{display:flex;gap:18px;width:max-content;animation:slide 60s linear infinite}
+.row.rev{animation-direction:reverse;animation-duration:75s}
+.row:nth-child(2){margin-left:-120px}
+@keyframes slide{to{transform:translateX(-50%)}}
+.ph{width:200px;height:250px;flex:none;border-radius:6px;background:#fff;padding:8px 8px 34px;box-shadow:0 6px 18px #0006;transform:rotate(var(--r,0deg))}
+.ph div{width:100%;height:100%;background-size:cover;background-position:center;display:grid;place-items:center;font-size:42px}
+.ph span{display:block;text-align:center;color:#4a2c33;font-size:20px;margin-top:4px}
+.veil{position:fixed;inset:0;background:radial-gradient(circle at center,#1b101788,#1b1017dd)}
+/* LOGIN */
+main{position:relative;min-height:100svh;display:grid;place-items:center;padding:24px}
+.login{max-width:430px;width:100%;text-align:center}
+.login h1{font-size:2.1rem;line-height:1.25;font-weight:500;margin:0 0 .5rem}
+.login p.sub{margin:0 0 1.4rem;color:var(--gold)}
+.date{font-size:1.5rem;color:var(--gold);margin-bottom:1rem}
+input,button{font:inherit;width:100%;padding:.8rem 1rem;border-radius:10px;border:1px solid #fff4;margin-bottom:.7rem}
+input{background:#0005;color:var(--ink)}
+input:focus,button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+button{background:var(--rose);color:#fff;border:0;cursor:pointer;font-weight:600}
+button:hover{filter:brightness(1.08)}
+#err{min-height:1.3em;color:#ffb3b3;font-size:.95rem}
+.hidden{display:none!important}
+/* CARTA */
+#letterView{position:relative;padding:32px 16px 60px;display:flex;flex-direction:column;align-items:center;gap:22px}
+.counter{font-size:1.7rem;color:var(--gold);text-align:center}
+.letter{max-width:620px;width:100%;background:var(--paper);color:var(--paperink);padding:36px 30px;border-radius:4px;box-shadow:0 12px 40px #0008;line-height:1.75;font-size:1.08rem}
+.letter h2{font-family:Caveat,cursive;font-size:2.4rem;margin:0 0 .6rem;font-weight:700}
+.letter p{margin:0 0 1rem}
+.letter .firma{font-family:Caveat,cursive;font-size:1.8rem;text-align:right;margin:0}
+.next{max-width:620px;width:100%;text-align:center;color:#fff9;font-size:.95rem}
+/*detalle*/
+.enc{max-width:760px;width:100%;display:flex;flex-direction:column;gap:30px;margin-top:10px}
+.enc h2{font-family:Caveat,cursive;font-size:2.6rem;font-weight:700;text-align:center;margin:0;color:var(--gold)}
+.item{display:flex;align-items:center;gap:26px;background:#ffffff14;border-radius:10px;padding:22px}
+.item:nth-child(odd){flex-direction:row-reverse}
+.item .foto{flex:none;width:44%;aspect-ratio:4/5;border:8px solid #fff;border-radius:4px;background-size:cover;background-position:center;display:grid;place-items:center;font-size:56px;box-shadow:0 8px 22px #0007}
+.item .txt h3{font-family:Caveat,cursive;font-size:2.2rem;margin:0 0 .3rem;color:var(--rose)}
+.item .txt p{margin:0;line-height:1.7;font-size:1.1rem}
+.item.top{border:2px solid var(--gold);background:#e9c27a1f}
+.item.top .txt h3{color:var(--gold);font-size:2.6rem}
+@media (max-width:560px){.item,.item:nth-child(odd){flex-direction:column}.item .foto{width:100%}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.sobre{margin:0;background:var(--paper);color:var(--paperink);border-radius:8px;padding:20px 16px;min-height:110px;display:flex;flex-direction:column;justify-content:center;gap:8px;text-align:center;box-shadow:0 6px 18px #0006}
+.sobre:hover{filter:none;transform:translateY(-3px)}
+.sobre b{font-family:Caveat,cursive;font-size:1.7rem}
+.sobre .m{display:none;line-height:1.6;font-size:1rem;font-weight:400}
+.sobre.open .m{display:block}
+.sobre.open .ico{display:none}
+.razon{background:var(--paper);color:var(--paperink);border-radius:8px;padding:26px;min-height:120px;display:grid;place-items:center;text-align:center;font-size:1.2rem;line-height:1.6;box-shadow:0 8px 22px #0007}
+.cuenta{text-align:center;color:#fffa;font-size:.95rem;margin:0}
+.vale{display:flex;align-items:center;justify-content:space-between;gap:14px;border:2px dashed var(--gold);border-radius:10px;padding:16px 18px;background:#e9c27a1a}
+.vale span{line-height:1.5}
+.vale button{width:auto;flex:none;margin:0;padding:.55rem 1rem}
+.vale.usado{opacity:.55}
+.vale.usado span{text-decoration:line-through}
+.vale.usado button{background:#666;cursor:default}
+.final{text-align:center;align-items:center;min-height:260px;justify-content:center}
+.final h2{font-size:2.4rem}
+.final p{font-size:1.15rem;line-height:1.7;margin:0}
+.botones{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.botones button{width:auto;min-width:120px;margin:0}
+#no{background:#8a6a72}
+.corazon{position:fixed;top:-40px;z-index:50;pointer-events:none;animation:caer linear forwards}
+@keyframes caer{to{transform:translateY(115vh) rotate(360deg)}}
+.pop{position:fixed;inset:0;z-index:60;background:#000b;display:grid;place-items:center;padding:20px}
+.pop div{background:var(--paper);color:var(--paperink);padding:14px 14px 18px;border-radius:8px;max-width:360px;width:100%;text-align:center}
+.pop img{width:100%;border-radius:4px;display:block;margin-bottom:10px}
+.pop p{font-family:Caveat,cursive;font-size:1.7rem;margin:0}
+.fsi{max-width:320px;width:100%;border:8px solid #fff;border-radius:4px;box-shadow:0 8px 22px #0007}
+@media (max-width:560px){.login h1{font-size:1.65rem}.letter{padding:26px 20px}.ph{width:150px;height:190px}.enc h2{font-size:2.1rem}.vale{flex-direction:column;align-items:stretch;text-align:center}.vale button{width:100%}.sobre:hover{transform:none}}
+@media (prefers-reduced-motion:reduce){.row{animation:none}}
+</style>
+</head>
+<body>
+
+<!-- Fondo: álbum que se mueve. Las fotos se editan en el script (const FOTOS) -->
+<div class="album" aria-hidden="true"><div class="row" id="r1"></div><div class="row rev" id="r2"></div><div class="row" id="r3"></div></div>
+<div class="veil"></div>
+
+<!-- PANTALLA 1: INICIO + LOGIN -->
+<main id="loginView">
+  <section class="login">
+    <div class="date hand" id="fechaInicio"></div>
+    <h1>Esto es un recuerdo para los dos, y espero tenerlo para siempre, y contigo también estar para siempre.</h1>
+    <p class="sub hand" style="font-size:1.5rem">Entra con nuestro secreto</p>
+    <input id="user" placeholder="Usuario" autocomplete="off">
+    <input id="pass" type="password" placeholder="Contraseña" autocomplete="off">
+    <button id="enter">Entrar</button>
+    <div id="err" role="alert"></div>
+  </section>
+</main>
+
+<!-- PANTALLA 2: CARTA -->
+<section id="letterView" class="hidden">
+  <div class="counter hand" id="contador"></div>
+  <article class="letter">
+    <h2 id="cTitulo"></h2>
+    <div id="cCuerpo"></div>
+    <p class="firma" id="cFirma"></p>
+  </article>
+  <section class="enc" id="encanta"></section>
+  <section class="enc" id="abrelo"></section>
+  <section class="enc" id="razones"></section>
+  <section class="enc" id="vales"></section>
+  <section class="enc final" id="final"></section>
+</section>
+
+<script>
+/* ============ EDITA AQUÍ ============ */
+const USUARIO   = "mivida";          // usuario para entrar
+const CLAVE     = "teamo";         // contraseña
+const FECHA     = "2023-02-15";      // fecha en que comenzaron (AAAA-MM-DD)
+const NOMBRE    = "Mi amor";         // nombre o apodo de ella
+const TITULO    = "Para ti, " + NOMBRE;
+const CARTA     = [
+  "hola mi niña hermosa esto es una pequeña carta se que no es algo a mano como estamos acostumbrados pero creo que este detalle es muy lindo te cree una pequeña paguina para el recuerdo tu eres la persona mas importante que pueda llegar a tener muchas gracias hermosa por aparecer en mi vida",
+  "los recuerdos que tenemos son cosas inolvidables cada cosa es algo que adoro tener en mi vida tu eres el mejr recuerdo que quiero tener y armar mas para mucho tiempo de mi vida muchas gracias hermosa por aguantar y pasar cada momento juntos eres muy importante y siempre lo seras te amo con todo mi corazon enserio te amo",
+  "se que esto no es algo que esperas y lo siento si es asi estas semanas se me complican mucho perdon mi vida gracias por todas las cosas eres mi vida y mi cielo y espero seguir asi y que el brillo de tus hermosos ojos alumbren mis noches y mis mañanas juntos a ti eres las muer mas hermosa que puede haber en mi mundo tu eres esa reina que manda y me deja sin palabras al verte porque eres la que quiero seguir y adorar para el resto de la eternidad"
+];
+const FIRMA     = "Con todo mi cariño, Miguel";
+/* Fotos del álbum de fondo: cada una con imagen (data o ruta) y un texto corto.
+   Mientras no haya fotos reales se muestran recuadros con emoji. */
+const FOTOS = [
+  {img:"fotos/foto1.jpg",  txt:"Inicios"},
+  {img:"fotos/foto2.jpg",  txt:"Comida"},
+  {img:"fotos/foto3.jpg",  txt:"Recuerdos"},
+  {img:"fotos/foto4.webp",  txt:"Gays"},
+  {img:"fotos/foto5.jpg",  txt:"Pance"},
+  {img:"fotos/foto6.jpg",  txt:"Hermosa"},
+  {img:"fotos/foto7.jpg",  txt:"Preciosa"},
+  {img:"fotos/foto8.jpg",  txt:"Emos"},
+  {img:"fotos/foto9.jpg",  txt:"Sexy"},
+  {img:"fotos/foto10.jpg", txt:"Hola demonio"},
+  {img:"fotos/foto11.jpg", txt:"Recuerdo"},
+  {img:"fotos/foto12.jpg", txt:"Tu y yo"},
+  {img:"fotos/foto13.jpg", txt:"Serio"}
+];
+/* ===================================== */
+
+const $ = id => document.getElementById(id);
+const fmt = d => new Date(d + "T00:00:00").toLocaleDateString("es-CO",{day:"numeric",month:"long",year:"numeric"});
+$("fechaInicio").textContent = "Desde el " + fmt(FECHA);
+
+// construir filas del álbum (duplicadas para bucle continuo)
+const bgs = ["#e0707f","#e9a27a","#b57fb3","#7fa6b5","#d98fa0","#c9a36b"];
+function card(f,i){
+  const st = f.img ? `background-image:url('${f.img}')` : `background:${bgs[i%bgs.length]}`;
+  return `<div class="ph" style="--r:${(i%5-2)*1.6}deg"><div style="${st}">${f.img?"":f.emoji||""}</div><span class="hand">${f.txt||""}</span></div>`;
+}
+["r1","r2","r3"].forEach((id,k)=>{
+  const set = FOTOS.map((f,i)=>card(f,i+k*2)).join("");
+  $(id).innerHTML = set + set + set + set;
+});
+
+function diasJuntos(){
+  const d = Math.floor((Date.now() - new Date(FECHA + "T00:00:00")) / 864e5);
+  return d > 0 ? `Llevamos ${d.toLocaleString("es-CO")} días juntos 💗` : "Nuestra historia empieza aquí 💗";
+}
+
+function entrar(){
+  if($("user").value.trim().toLowerCase() === USUARIO.toLowerCase() && $("pass").value === CLAVE){
+    $("cTitulo").textContent = TITULO;
+    $("cCuerpo").innerHTML = CARTA.map(p => `<p>${p}</p>`).join("");
+    $("cFirma").textContent = FIRMA;
+    $("contador").textContent = diasJuntos();
+    $("loginView").classList.add("hidden");
+    $("letterView").classList.remove("hidden");
+    window.scrollTo(0,0);
+  } else {
+    $("err").textContent = "Usuario o contraseña incorrectos. Prueba de nuevo.";
+  }
+}
+$("enter").addEventListener("click", entrar);
+["user","pass"].forEach(id => $(id).addEventListener("keydown", e => { if(e.key==="Enter") entrar(); }));
+
+/* ===== LO QUE ME ENCANTA DE TI: edita fotos y frases ===== */
+const ME_ENCANTA = [
+  {titulo:"Tus ojos",   img:"fotos/foto7.jpg",   emoji:"👀", frase:"Me encantan tus ojos: en ellos encuentro calma, hogar y todo lo bonito que quiero mirar cada día."},
+  {titulo:"Tu pelo",    img:"fotos/foto15.jpg",   emoji:"💇‍♀️", frase:"Tu pelo, tan tuyo y tan hermoso, eres un tomate oscuro un fosforo me encanta tu pelo hermosa asi rojo o negro siempre es hermoso."},
+  {titulo:"Tu cara",    img:"fotos/foto16.jpeg",   emoji:"😊", frase:"Tu cara es la primera imagen que quiero ver al despertar y la última antes de dormir."},
+  {titulo:"Tu nariz",   img:"fotos/foto17.jpeg",  emoji:"🌸", frase:"Tu nariz, pequeñita y perfecta. Me encanta cuando la arrugas al reírte."},
+  {titulo:"Tu cuerpo",  img:"fotos/foto14.jpg", emoji:"💗", frase:"Me encanta todo de ti, cada detalle de tu cuerpo, porque es parte de la persona que amo."},
+  {titulo:"Lo que más me gusta de ti", img:"fotos/foto18.jpg", emoji:"💞", top:true,
+   frase:"Lo que más me gusta de ti eres tú completa: tu forma de ser, tu risa y cómo me haces sentir. tu belleza yo creo que es una de las cosas mas perfectas pero sabes que enrrealidad hace que este aqui eres tu que digo enserio tu forma de ser de amar de ser tu hace que todo sea mejor es de lo que me enamore y que me enamora reirme contigo es hermoso ya que cada vez que estamos juntos y veo tu sonrisa o si dices algo bobo o nos miramos nada mas es algo que nunca nunca quiero cambiar tu eres mi sueño que se ah hecho relalidad TE AMO."}
+];
+$("encanta").innerHTML = "<h2>Lo que me encanta de ti</h2>" + ME_ENCANTA.map(e =>
+  `<article class="item${e.top ? " top" : ""}">
+     <div class="foto" style="${e.img ? `background-image:url('${e.img}')` : "background:#e0707f"}">${e.img ? "" : e.emoji}</div>
+     <div class="txt"><h3>${e.titulo}</h3><p>${e.frase}</p></div>
+   </article>`).join("");
+
+/* ===== ÁBRELO CUANDO… (edita títulos y mensajes) ===== */
+const ABRELO = [
+  {t:"Cuando estés triste",  m:"Respira hondo. Esto también pasa, y yo estoy contigo aunque no me veas."},
+  {t:"Cuando me extrañes",   m:"Cierra los ojos y piensa en mi abrazo. dejare tu cuarto lleno de locion siempre que pueda."},
+  {t:"Cuando quieras reírte", m:"llamame ahre lo posible de sacarte una sonrisa "},
+  {t:"Cuando no puedas dormir", m:"entra a discord veremos una serie y te dire cosas hermosas hasta que duermas y sueñes conmigo."},
+  {t:"Cuando dudes de ti",   m:"Eres más fuerte, más linda y más valiosa de lo que crees no caigas en tus pensamientos cielo siempre seras muy inteligente y fuerte yo creo en ti."}
+];
+$("abrelo").innerHTML = "<h2>Ábrelo cuando…</h2><div class='grid'>" + ABRELO.map(a =>
+  `<button class="sobre"><span class="ico">💌</span><b>${a.t}</b><span class="m">${a.m}</span></button>`).join("") + "</div>";
+$("abrelo").addEventListener("click", e => { const s = e.target.closest(".sobre"); if (s) s.classList.toggle("open"); });
+
+/* ===== RAZONES POR LAS QUE TE QUIERO (agrega las que quieras) ===== */
+const RAZONES = [
+  "Porque me haces reír en mis peores dias.",
+  "Porque contigo todo se siente tranquilo.",
+  "Porque tu sonrisa me cambia el día.",
+  "Porque eres valiente aunque no lo creas.",
+  "Porque me escuchas de verdad.",
+  "Porque contigo hasta lo simple se vuelve especial.",
+  "Porque eres hermosa.",
+  "Porque adoro ver tus obras de arte.",
+  "Porque me enseñas lo mejor de ti.",
+  "Porque me encanta molestarte hasta que te enojes.",
+  "Porque eres tu.",
+  "Porque quiero casarme contigo.",
+  "Porque nos conectamos.",
+  "Porque me abres la puerta.",
+  "Porque me cuidas cuando peor estoy.",
+  "Porque eres lo mas importante de mi vda.",
+  "Porque me encanta tu enorme culo.",
+  "Porque eres la mujer que me enamoro.",
+  
+];
+let bolsa = [], vistas = 0;
+$("razones").innerHTML = `<h2>Razones por las que te quiero</h2>
+  <div class="razon" id="razonTxt">Toca el botón para descubrir una razón 💗</div>
+  <p class="cuenta" id="razonCuenta"></p>
+  <button id="razonBtn">Dame una razón</button>`;
+$("razonBtn").addEventListener("click", () => {
+  if (!bolsa.length) { bolsa = [...RAZONES].sort(() => Math.random() - .5); vistas = 0; }
+  $("razonTxt").textContent = bolsa.pop();
+  vistas++;
+  $("razonCuenta").textContent = `Razón ${vistas} de ${RAZONES.length}`;
+});
+
+/* ===== VALES DE AMOR (edita los vales) ===== */
+const VALES = [
+  "Vale por una cena donde tú elijas",
+  "Vale por un abrazo largo, sin prisa",
+  "Vale por una película y tú escoges",
+  "Vale por un masaje de 15 minutos",
+  "Vale por un día de salida solo para los dos",
+  "Vale por un “sí” a lo que me pidas (este cupon no admite cualquier situacion donde este presente mi culo)"
+];
+let usados = [];
+try { usados = JSON.parse(localStorage.getItem("valesUsados") || "[]"); } catch (e) {}
+function pintarVales() {
+  $("vales").innerHTML = "<h2>Vales de amor</h2>" + VALES.map((v, i) =>
+    `<div class="vale${usados.includes(i) ? " usado" : ""}"><span>${v}</span>
+     <button data-i="${i}">${usados.includes(i) ? "Canjeado ✔" : "Canjear"}</button></div>`).join("");
+}
+pintarVales();
+$("vales").addEventListener("click", e => {
+  const b = e.target.closest("button[data-i]"); if (!b) return;
+  const i = +b.dataset.i;
+  if (usados.includes(i)) return;
+  usados.push(i);
+  try { localStorage.setItem("valesUsados", JSON.stringify(usados)); } catch (e) {}
+  pintarVales();
+});
+
+/* ===== FINAL SORPRESA (edita textos y fotos) ===== */
+const PREGUNTA = "¿Quieres seguir escribiendo esta historia conmigo, para siempre?";
+const RESPUESTA = "Diga que no y vera sapa. Te amo. 💗";
+const IMG_SI = "fotos/si.jpg";
+const NOS = [   // una por cada vez que toque "No"; al terminar la lista, vuelve a empezar
+  {img:"fotos/no1.jpg", txt:"listo pues"},
+  {img:"fotos/no2.png", txt:"entiendo :C"}
+];
+let nNo = 0;
+$("final").innerHTML = `<h2>Una última pregunta…</h2><p id="preg">${PREGUNTA}</p>
+  <div class="botones"><button id="si">Sí 💗</button><button id="no">No</button></div>`;
+function huir() {
+  const n = $("no"); n.style.position = "fixed";
+  n.style.left = Math.random() * (innerWidth - 110) + "px";
+  n.style.top  = Math.random() * (innerHeight - 60) + "px";
+}
+$("no").addEventListener("click", () => {
+  const o = NOS[nNo++ % NOS.length];
+  const p = document.createElement("div");
+  p.className = "pop";
+  p.innerHTML = `<div><img src="${o.img}" alt=""><p>${o.txt}</p></div>`;
+  p.addEventListener("click", () => { p.remove(); huir(); });
+  document.body.appendChild(p);
+});
+$("si").addEventListener("click", () => {
+  $("preg").textContent = RESPUESTA;
+  $("preg").className = "hand"; $("preg").style.fontSize = "2rem";
+  document.querySelector("#final .botones").remove();
+  $("preg").insertAdjacentHTML("afterend", `<img class="fsi" src="${IMG_SI}" alt="">`);
+  for (let i = 0; i < 50; i++) {
+    const c = document.createElement("div");
+    c.className = "corazon"; c.textContent = ["💗","💖","💞","❤️","🌹"][i % 5];
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.fontSize = 18 + Math.random() * 26 + "px";
+    c.style.animationDuration = 3 + Math.random() * 3 + "s";
+    c.style.animationDelay = Math.random() * 2 + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 9000);
+  }
+
+});
+</script>
+</body>
+</html>
